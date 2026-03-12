@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keheilan Asset Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --accent:#00917C;
+  --accent2:#055A57;
+  --accent-light:rgba(0,145,124,0.1);
+  --aqua:#00FFDA;
+  --peach:#FFCE7B;
+  --dark:#141414;
+  --dark2:#1A1D1A;
+  --ink:#141414;
+  --ink60:rgba(20,20,20,0.6);
+  --ink30:rgba(20,20,20,0.3);
+  --bg:#FFFFFF;
+  --bg2:#F0F7F6;
+  --line:rgba(5,90,87,0.12);
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --r:12px;
+  --r-pill:999px;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(20,20,20,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark{font-family:var(--serif);font-size:1.1rem;color:#fff;letter-spacing:-0.01em;}
+.nav-logo-mark sup{font-family:var(--sans);font-size:0.42rem;font-weight:600;color:var(--aqua);vertical-align:super;margin-left:2px;}
+.nav-center{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-pill);padding:6px 8px;}
+.nav-center a{font-size:0.78rem;font-weight:400;color:rgba(255,255,255,0.55);text-decoration:none;padding:7px 16px;border-radius:var(--r-pill);transition:all 0.2s;}
+.nav-center a:hover,.nav-center a.active{color:#fff;background:rgba(255,255,255,0.1);}
+.nav-cta{font-family:var(--sans);font-size:0.78rem;font-weight:500;color:var(--dark);background:var(--aqua);padding:10px 22px;border-radius:var(--r-pill);text-decoration:none;transition:all 0.2s;}
+.nav-cta:hover{background:#fff;}
+@media(max-width:768px){.nav-center{display:none;}}
+
+/* ── HERO ── */
+.hero{min-height:100svh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--dark);}
+.hero-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(0,145,124,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,145,124,0.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 30%,transparent 100%);}
+.hero-glow1{position:absolute;top:-100px;left:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,145,124,0.15) 0%,transparent 65%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,255,218,0.08) 0%,transparent 65%);pointer-events:none;}
+.hero-content{position:relative;z-index:1;max-width:740px;padding:0 24px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:500;color:var(--aqua);background:rgba(0,255,218,0.08);border:1px solid rgba(0,255,218,0.2);padding:8px 18px;border-radius:var(--r-pill);margin-bottom:28px;animation:fadeUp 0.6s 0.2s both;}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--aqua);}
+.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,7vw,5rem);font-weight:400;line-height:1.08;color:#fff;letter-spacing:-0.02em;margin-bottom:20px;animation:fadeUp 0.7s 0.35s both;}
+.hero h1 em{font-style:italic;color:var(--aqua);}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,0.5);line-height:1.75;max-width:520px;margin:0 auto 32px;animation:fadeUp 0.7s 0.5s both;}
+.hero-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:0.82rem;font-weight:500;color:var(--dark);background:var(--aqua);padding:14px 28px;border-radius:var(--r-pill);text-decoration:none;transition:all 0.25s;animation:fadeUp 0.7s 0.65s both;}
+.hero-btn:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,255,218,0.2);}
+.hero-btn svg{transition:transform 0.2s;}
+.hero-btn:hover svg{transform:translateX(4px);}
+
+/* ── TRUSTED BY ── */
+.trusted{padding:32px 40px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:56px;flex-wrap:wrap;background:var(--bg);}
+.trusted-label{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink30);}
+.trusted-item{font-size:0.82rem;font-weight:500;color:var(--ink30);letter-spacing:0.02em;}
+
+/* ── ABOUT ── */
+.about{padding:100px 40px;background:var(--bg);}
+.about-inner{max-width:1200px;margin:0 auto;}
+.about-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:60px;}
+.tag-pill{display:inline-flex;font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:6px 14px;border-radius:var(--r-pill);margin-bottom:20px;}
+.about-headline{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:28px;}
+.about-headline em{font-style:italic;color:var(--accent);}
+.about-btn{display:inline-flex;align-items:center;gap:10px;font-size:0.82rem;font-weight:500;color:var(--ink);border:1px solid var(--line);padding:11px 22px;border-radius:var(--r-pill);text-decoration:none;transition:all 0.2s;}
+.about-btn:hover{border-color:var(--accent);color:var(--accent);}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);padding-top:48px;}
+.stat{padding-right:32px;border-right:1px solid var(--line);}
+.stat:last-child{border-right:none;padding-right:0;padding-left:32px;}
+.stat:not(:first-child):not(:last-child){padding:0 32px;}
+.stat-num{font-family:var(--serif);font-size:2.8rem;font-weight:400;color:var(--ink);line-height:1;margin-bottom:6px;}
+.stat-num em{font-style:normal;color:var(--accent);}
+.stat-label{font-size:0.82rem;color:var(--ink60);}
+@media(max-width:768px){.about-top{grid-template-columns:1fr;gap:32px;}.stats{grid-template-columns:1fr 1fr;gap:24px;}.stat{border:none;padding:0!important;}}
+
+/* ── PRODUCTS ── */
+.products{padding:100px 40px;background:var(--bg2);}
+.section-hd{text-align:center;max-width:600px;margin:0 auto 60px;}
+.section-hd .tag-pill{margin-bottom:16px;}
+.section-hd h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.2;}
+.section-hd p{font-size:0.9375rem;color:var(--ink60);line-height:1.7;}
+.products-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);}
+.prod-card{background:var(--bg);padding:40px 36px;transition:background 0.2s;position:relative;overflow:hidden;}
+.prod-card:hover{background:#fff;}
+.prod-num{font-size:0.7rem;font-weight:600;color:var(--accent);margin-bottom:12px;letter-spacing:0.04em;}
+.prod-title{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--ink);margin-bottom:8px;line-height:1.25;}
+.prod-desc{font-size:0.85rem;color:var(--ink60);line-height:1.65;margin-bottom:24px;}
+.prod-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;}
+.prod-pill{font-size:0.65rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-pill);border:1px solid var(--line);color:var(--ink60);}
+.prod-link{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:500;color:var(--accent);text-decoration:none;transition:gap 0.2s;}
+.prod-link:hover{gap:12px;}
+.prod-accent-bar{position:absolute;top:0;left:0;right:0;height:3px;}
+.p1 .prod-accent-bar{background:var(--accent2);}
+.p2 .prod-accent-bar{background:var(--accent);}
+.p3 .prod-accent-bar{background:var(--peach);}
+@media(max-width:768px){.products-grid{grid-template-columns:1fr;}}
+
+/* ── WHY ── */
+.why{padding:100px 40px;background:var(--bg);}
+.why-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;}
+.why-left h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:400;color:var(--ink);line-height:1.15;margin-top:16px;}
+.why-right-desc{font-size:1rem;color:var(--ink60);line-height:1.75;margin-bottom:40px;}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.why-card{background:var(--bg2);border-radius:var(--r);padding:24px;border:1px solid var(--line);}
+.why-ico{width:44px;height:44px;border-radius:8px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--accent);}
+.why-card h4{font-size:0.9375rem;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.why-card p{font-size:0.82rem;color:var(--ink60);line-height:1.6;}
+@media(max-width:768px){.why-inner{grid-template-columns:1fr;gap:40px;}.why-grid{grid-template-columns:1fr;}}
+
+/* ── FEATURED PRODUCT ── */
+.featured{padding:100px 40px;background:var(--dark);}
+.featured-hd{max-width:1200px;margin:0 auto 48px;display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:40px;}
+.featured-hd h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;color:#fff;line-height:1.2;}
+.featured-hd p{font-size:0.9375rem;color:rgba(255,255,255,0.4);line-height:1.7;}
+.featured-card{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;}
+.feat-visual{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r);padding:48px;display:flex;flex-direction:column;justify-content:center;min-height:380px;position:relative;overflow:hidden;}
+.feat-glow{position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(0,255,218,0.12) 0%,transparent 65%);pointer-events:none;}
+.feat-num{font-family:var(--serif);font-size:8rem;line-height:0.9;color:rgba(255,255,255,0.06);position:absolute;bottom:24px;right:32px;pointer-events:none;}
+.feat-label{font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:14px;}
+.feat-big-num{font-family:var(--serif);font-size:5rem;line-height:0.9;color:var(--aqua);margin-bottom:8px;}
+.feat-period{font-size:0.82rem;color:rgba(255,255,255,0.35);margin-bottom:32px;}
+.feat-pts{display:flex;flex-direction:column;gap:10px;}
+.feat-pt{display:flex;align-items:center;gap:10px;font-size:0.82rem;color:rgba(255,255,255,0.5);}
+.feat-pt::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--aqua);flex-shrink:0;}
+.feat-info{padding:12px 0;}
+.feat-cat{display:inline-flex;font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--aqua);background:rgba(0,255,218,0.08);border:1px solid rgba(0,255,218,0.15);padding:6px 14px;border-radius:var(--r-pill);margin-bottom:20px;}
+.feat-name{font-family:var(--serif);font-size:2.4rem;font-weight:400;color:#fff;margin-bottom:16px;line-height:1.2;}
+.feat-desc{font-size:0.9375rem;color:rgba(255,255,255,0.45);line-height:1.75;margin-bottom:28px;}
+.feat-link{display:inline-flex;align-items:center;gap:10px;font-size:0.82rem;font-weight:500;color:var(--aqua);text-decoration:none;transition:gap 0.2s;}
+.feat-link:hover{gap:14px;}
+.feat-tabs{display:flex;gap:8px;margin-top:32px;}
+.feat-tab{height:3px;border-radius:2px;cursor:pointer;transition:all 0.3s;}
+.feat-tab.active{width:48px;background:var(--aqua);}
+.feat-tab:not(.active){width:24px;background:rgba(255,255,255,0.15);}
+@media(max-width:768px){.featured-hd{grid-template-columns:1fr;}.featured-card{grid-template-columns:1fr;}}
+
+/* ── PROCESS ── */
+.process{padding:100px 40px;background:var(--bg);}
+.process-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start;}
+.process-left h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;color:var(--ink);margin:16px 0 16px;}
+.process-left p{font-size:0.9375rem;color:var(--ink60);line-height:1.7;}
+.process-steps{display:flex;flex-direction:column;}
+.process-step{padding:24px 0;border-bottom:1px solid var(--line);cursor:pointer;}
+.process-step:first-child{border-top:1px solid var(--line);}
+.step-header{display:flex;align-items:center;justify-content:space-between;}
+.step-num{font-size:0.75rem;font-weight:600;color:var(--accent);}
+.step-title{font-size:1rem;font-weight:600;color:var(--ink);margin:8px 0 10px;}
+.step-body{font-size:0.875rem;color:var(--ink60);line-height:1.7;}
+.step-arrow{color:var(--ink30);}
+@media(max-width:768px){.process-inner{grid-template-columns:1fr;gap:48px;}}
+
+/* ── TESTIMONIALS ── */
+.testimonials{padding:100px 40px;background:var(--bg2);}
+.testi-inner{max-width:1200px;margin:0 auto;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
+.testi-card{background:var(--bg);border-radius:var(--r);padding:32px;border:1px solid var(--line);}
+.testi-quote{font-size:2.5rem;color:var(--accent);line-height:1;margin-bottom:16px;font-family:Georgia;}
+.testi-text{font-size:0.9375rem;color:var(--ink60);line-height:1.7;margin-bottom:24px;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--accent);font-size:0.82rem;}
+.testi-name{font-size:0.875rem;font-weight:600;color:var(--ink);}
+.testi-role{font-size:0.75rem;color:var(--ink60);}
+@media(max-width:768px){.testi-grid{grid-template-columns:1fr;}}
+
+/* ── FEES ── */
+.fees{padding:100px 40px;background:var(--bg);}
+.fees-grid{max-width:1100px;margin:48px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.fee-card{border-radius:var(--r);padding:40px 36px;border:1px solid var(--line);}
+.fee-card.featured{background:var(--dark);border-color:var(--dark);}
+.fee-lbl{font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink60);margin-bottom:16px;}
+.fee-card.featured .fee-lbl{color:rgba(255,255,255,0.35);}
+.fee-product{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--ink);margin-bottom:4px;line-height:1.2;}
+.fee-card.featured .fee-product{color:#fff;}
+.fee-entry{font-size:2.4rem;font-family:var(--serif);color:var(--accent);margin-bottom:4px;line-height:1;}
+.fee-card.featured .fee-entry{color:var(--aqua);}
+.fee-perf{font-size:0.82rem;color:var(--ink60);margin-bottom:24px;}
+.fee-card.featured .fee-perf{color:rgba(255,255,255,0.35);}
+.fee-divider{height:1px;background:var(--line);margin-bottom:24px;}
+.fee-card.featured .fee-divider{background:rgba(255,255,255,0.08);}
+.fee-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.fee-features li{font-size:0.875rem;color:var(--ink60);display:flex;align-items:center;gap:8px;}
+.fee-card.featured .fee-features li{color:rgba(255,255,255,0.45);}
+.fee-features li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+.fee-card.featured .fee-features li::before{background:var(--aqua);}
+.fee-btn{display:block;text-align:center;font-size:0.82rem;font-weight:500;padding:13px;border-radius:var(--r-pill);text-decoration:none;transition:all 0.2s;}
+.fee-btn-outline{color:var(--ink);border:1px solid var(--line);}
+.fee-btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+.fee-btn-accent{color:var(--dark);background:var(--aqua);}
+.fee-btn-accent:hover{background:var(--accent);color:#fff;}
+@media(max-width:768px){.fees-grid{grid-template-columns:1fr;}}
+
+/* ── INSIGHTS ── */
+.insights{padding:100px 40px;background:var(--bg2);}
+.insights-grid{max-width:1200px;margin:48px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.insight-card{background:var(--bg);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);}
+.insight-img{width:100%;height:180px;object-fit:cover;display:block;}
+.insight-body{padding:24px;}
+.insight-cat{display:inline-flex;font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.insight-title{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--ink);line-height:1.45;margin-bottom:10px;}
+.insight-date{font-size:0.75rem;color:var(--ink30);}
+@media(max-width:768px){.insights-grid{grid-template-columns:1fr;}}
+
+/* ── CTA BANNER ── */
+.cta-banner{padding:80px 40px;background:var(--accent2);text-align:center;position:relative;overflow:hidden;}
+.cta-banner::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,255,218,0.15) 0%,transparent 65%);pointer-events:none;}
+.cta-banner h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;position:relative;}
+.cta-banner p{font-size:0.9375rem;color:rgba(255,255,255,0.6);margin-bottom:32px;position:relative;}
+.cta-banner a{display:inline-flex;align-items:center;gap:10px;font-size:0.82rem;font-weight:500;color:var(--dark);background:var(--aqua);padding:14px 28px;border-radius:var(--r-pill);text-decoration:none;transition:all 0.2s;position:relative;}
+.cta-banner a:hover{background:#fff;transform:translateY(-2px);}
+
+/* ── FOOTER ── */
+footer{padding:40px;background:var(--dark);border-top:1px solid rgba(255,255,255,0.06);}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.footer-logo{font-family:var(--serif);font-size:1rem;color:#fff;text-decoration:none;}
+.footer-logo sup{font-family:var(--sans);font-size:0.42rem;font-weight:600;color:var(--aqua);vertical-align:super;margin-left:2px;}
+.footer-links{display:flex;gap:24px;list-style:none;}
+.footer-links a{font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:#fff;}
+.footer-copy{font-size:0.7rem;color:rgba(255,255,255,0.18);}
+
+/* ── ANIMS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.rv{opacity:0;transform:translateY(20px);transition:opacity 0.65s cubic-bezier(0.22,1,0.36,1),transform 0.65s cubic-bezier(0.22,1,0.36,1);}
+.rv.on{opacity:1;transform:none;}
+.d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-mark">Keheilan<sup>AM</sup></span>
+  </a>
+  <div class="nav-center">
+    <a href="#" class="active">Home</a>
+    <a href="#products">KAIF</a>
+    <a href="#products">Sukuk</a>
+    <a href="#products">Index Portfolios</a>
+  </div>
+  <a href="#contact" class="nav-cta">Schedule a Call</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow1"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Shariah-Compliant Asset Management</div>
+    <h1>Your Capital, <em>Managed with Discipline.</em></h1>
+    <p class="hero-sub">Three distinct investment strategies — AI-managed equity, Sukuk income, and index replication — each built on the same principle: precision over speculation.</p>
+    <a href="#products" class="hero-btn">
+      Explore Our Strategies
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- TRUSTED BY -->
+<div class="trusted rv">
+  <div class="trusted-label">Powered by</div>
+  <div class="trusted-item">SP Funds ETFs</div>
+  <div class="trusted-item">BlackRock Indices</div>
+  <div class="trusted-item">Vanguard Benchmarks</div>
+  <div class="trusted-item">Dow Jones Sukuk</div>
+  <div class="trusted-item">MSCI World Shariah</div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-top">
+      <div>
+        <div class="tag-pill rv">About Keheilan</div>
+        <h2 class="about-headline rv d1">Built on institutional-grade research. <em>Governed by Shariah. Driven by results.</em></h2>
+        <a href="#" class="about-btn rv d2">
+          Get to Know Us
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div></div>
+    </div>
+    <div class="stats rv d2">
+      <div class="stat"><div class="stat-num"><em>3</em></div><div class="stat-label">Distinct Investment Strategies</div></div>
+      <div class="stat"><div class="stat-num"><em>+40</em>%</div><div class="stat-label">KAIF Simulated Return · 9 Months</div></div>
+      <div class="stat"><div class="stat-num"><em>4–6</em>%</div><div class="stat-label">Sukuk Target Annual Return</div></div>
+      <div class="stat"><div class="stat-num"><em>0</em>%</div><div class="stat-label">Performance Fees on All Products</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-hd rv">
+    <div class="tag-pill">Our Strategies</div>
+    <h2>Three Ways to Invest with Keheilan</h2>
+    <p>Each strategy is built around a distinct investment thesis, risk profile, and objective. All are Shariah-compliant, professionally managed.</p>
+  </div>
+  <div class="products-grid">
+    <div class="prod-card p1 rv">
+      <div class="prod-accent-bar"></div>
+      <div class="prod-num">01</div>
+      <div class="prod-title">KAIF</div>
+      <p class="prod-desc">AI-managed, multi-asset portfolio drawing from top-performing ETFs across equities, gold, and Sukuk. Built on institutional research, sharpened by AI, governed by Shariah.</p>
+      <div class="prod-pills">
+        <span class="prod-pill">AI-Managed</span>
+        <span class="prod-pill">Multi-Asset</span>
+        <span class="prod-pill">Shariah</span>
+      </div>
+      <a href="#" class="prod-link">View Strategy <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="prod-card p2 rv d1">
+      <div class="prod-accent-bar"></div>
+      <div class="prod-num">02</div>
+      <div class="prod-title">Sukuk Portfolios</div>
+      <p class="prod-desc">Capital-preserving fixed income built from Shariah-compliant bonds. Four to six percent target annual return. Built for investors who set the terms before they invest.</p>
+      <div class="prod-pills">
+        <span class="prod-pill">Capital Preservation</span>
+        <span class="prod-pill">4–6% Target</span>
+        <span class="prod-pill">0% Entry</span>
+      </div>
+      <a href="#" class="prod-link">View Strategy <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="prod-card p3 rv d2">
+      <div class="prod-accent-bar"></div>
+      <div class="prod-num">03</div>
+      <div class="prod-title">Managed Index Portfolios</div>
+      <p class="prod-desc">Four portfolios benchmarked to the world's leading Shariah ETFs — SPUS, SPWO, SPRE, SPSK. Global benchmarks, built for your risk appetite. From $100K.</p>
+      <div class="prod-pills">
+        <span class="prod-pill">Global Benchmarks</span>
+        <span class="prod-pill">0.75% Entry</span>
+        <span class="prod-pill">From $100K</span>
+      </div>
+      <a href="#" class="prod-link">View Strategy <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="why-inner">
+    <div class="why-left rv">
+      <div class="tag-pill">Why Keheilan</div>
+      <h2>Precision where it counts. Principles throughout.</h2>
+    </div>
+    <div class="why-right rv d1">
+      <p class="why-right-desc">Every strategy at Keheilan is built to a single standard: institutional-grade discipline applied to Shariah-compliant investing. No guesswork. No compromises.</p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <h4>Shariah Compliance Built In</h4>
+          <p>Every instrument is screened before selection. Compliance is structural, not a filter applied after the fact.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 5v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <h4>Systematic, Not Discretionary</h4>
+          <p>Rules-based execution removes emotion and bias. Every allocation follows a defined, repeatable process.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 13l4-5 3 3 3-5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h4>Transparent Fee Structure</h4>
+          <p>Zero performance fees across all products. What your portfolio earns is entirely yours.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L4 5v6c0 4 2.4 7.5 6 9 3.6-1.5 6-5 6-9V5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <h4>Risk Management as Infrastructure</h4>
+          <p>Drawdown limits, volatility ceilings, and concentration caps are hardwired — not activated when things go wrong.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCT: KAIF -->
+<section class="featured">
+  <div class="featured-hd rv">
+    <h2>KAIF — Our Flagship Strategy</h2>
+    <p>Institutional research. AI precision. Shariah at its core.</p>
+  </div>
+  <div class="featured-card rv d1">
+    <div class="feat-visual">
+      <div class="feat-glow"></div>
+      <div class="feat-num">40</div>
+      <div class="feat-label">Simulated Return</div>
+      <div class="feat-big-num">+40%</div>
+      <div class="feat-period">April 2025 — January 2026 · 9 Months · Simulated</div>
+      <div class="feat-pts">
+        <div class="feat-pt">Sourced from BlackRock and Vanguard ETFs</div>
+        <div class="feat-pt">AI rebalancing — continuous, automatic</div>
+        <div class="feat-pt">All instruments Shariah-screened before entry</div>
+        <div class="feat-pt">No discretionary overrides</div>
+      </div>
+    </div>
+    <div class="feat-info">
+      <span class="feat-cat">AI-Managed · Multi-Asset</span>
+      <div class="feat-name">Keheilan AI Index Fund</div>
+      <p class="feat-desc">KAIF draws from top-performing holdings inside ETFs managed by the world's leading firms. AI then reweights positions across equities, gold, and Sukuk to maximize risk-adjusted returns — within a fully Shariah-compliant framework.</p>
+      <a href="#" class="feat-link">View Full Strategy <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="feat-tabs">
+        <div class="feat-tab active"></div>
+        <div class="feat-tab"></div>
+        <div class="feat-tab"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE INVEST -->
+<section class="process">
+  <div class="process-inner">
+    <div class="process-left rv">
+      <div class="tag-pill">How We Invest</div>
+      <h2>A clear process. Applied consistently.</h2>
+      <p>Every strategy at Keheilan follows a defined investment process — from instrument selection through ongoing management. Nothing is discretionary.</p>
+    </div>
+    <div class="process-steps rv d1">
+      <div class="process-step">
+        <div class="step-header">
+          <span class="step-num">01<span style="color:var(--ink30)">/(03)</span></span>
+          <svg class="step-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-title">Select Your Strategy</div>
+        <p class="step-body">Choose from KAIF for AI-managed multi-asset growth, Sukuk Portfolios for capital preservation and income, or Managed Index Portfolios for global benchmark exposure matched to your risk appetite.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-header">
+          <span class="step-num">02<span style="color:var(--ink30)">/(03)</span></span>
+          <svg class="step-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-title">We Build and Screen</div>
+        <p class="step-body">Keheilan constructs your portfolio from Shariah-compliant instruments, applying our screening methodology at every stage. Compliance is embedded in construction, not applied retroactively.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-header">
+          <span class="step-num">03<span style="color:var(--ink30)">/(03)</span></span>
+          <svg class="step-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-title">We Manage Continuously</div>
+        <p class="step-body">Markets move. We monitor and rebalance every portfolio continuously — maintaining benchmark alignment, Shariah compliance, and risk boundaries without requiring anything from you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testi-inner">
+    <div class="rv" style="margin-bottom:0;">
+      <div class="tag-pill">What Investors Say</div>
+      <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;margin-top:12px;color:var(--ink);">Trusted by serious Shariah-compliant investors</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card rv">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">KAIF gave me institutional-grade equity exposure that I could not access elsewhere within a Shariah framework. The AI-driven approach removes the guesswork entirely.</p>
+        <div class="testi-author"><div class="testi-avatar">AH</div><div><div class="testi-name">Ahmed Hassan</div><div class="testi-role">Private Investor, Dubai</div></div></div>
+      </div>
+      <div class="testi-card rv d1">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The Sukuk portfolio is exactly what I needed — steady, compliant, and professionally managed. The fee structure is transparent and the team is always accessible.</p>
+        <div class="testi-author"><div class="testi-avatar">NM</div><div><div class="testi-name">Nadia Mohamed</div><div class="testi-role">Family Office Manager</div></div></div>
+      </div>
+      <div class="testi-card rv d2">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">I started with the Index Portfolios and was impressed by how closely they track the benchmarks. At 0.75%, the fee is exceptional for what you receive.</p>
+        <div class="testi-author"><div class="testi-avatar">KJ</div><div><div class="testi-name">Khalid Jaber</div><div class="testi-role">Investment Director</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEES -->
+<section class="fees">
+  <div class="section-hd rv">
+    <div class="tag-pill">Fee Structure</div>
+    <h2>Transparent Fees Across Every Strategy</h2>
+    <p>No hidden charges. No performance fees. What the portfolio earns is yours.</p>
+  </div>
+  <div class="fees-grid">
+    <div class="fee-card rv">
+      <div class="fee-lbl">KAIF</div>
+      <div class="fee-product">Keheilan AI Index Fund</div>
+      <div class="fee-entry">0%</div>
+      <div class="fee-perf">Entry Fee · 0% Performance Fee</div>
+      <div class="fee-divider"></div>
+      <ul class="fee-features">
+        <li>AI-managed multi-asset portfolio</li>
+        <li>Continuous auto-rebalancing</li>
+        <li>Shariah-screened at every stage</li>
+        <li>Simulated +40% over 9 months</li>
+      </ul>
+      <a href="#" class="fee-btn fee-btn-outline">View KAIF</a>
+    </div>
+    <div class="fee-card featured rv d1">
+      <div class="fee-lbl">Sukuk Portfolios</div>
+      <div class="fee-product">Capital Preservation</div>
+      <div class="fee-entry">0%</div>
+      <div class="fee-perf">Entry Fee · 0% Performance Fee</div>
+      <div class="fee-divider"></div>
+      <ul class="fee-features">
+        <li style="color:rgba(255,255,255,0.5);">4–6% target annual return</li>
+        <li style="color:rgba(255,255,255,0.5);">Investment-grade Sukuk only</li>
+        <li style="color:rgba(255,255,255,0.5);">Duration managed for stability</li>
+        <li style="color:rgba(255,255,255,0.5);">Built for capital protection</li>
+      </ul>
+      <a href="#" class="fee-btn fee-btn-accent">View Sukuk</a>
+    </div>
+    <div class="fee-card rv d2">
+      <div class="fee-lbl">Managed Index Portfolios</div>
+      <div class="fee-product">Global Benchmarks</div>
+      <div class="fee-entry">0.75%</div>
+      <div class="fee-perf">Entry Fee · 0% Performance Fee · From $100K</div>
+      <div class="fee-divider"></div>
+      <ul class="fee-features">
+        <li>SPUS, SPWO, SPRE, SPSK</li>
+        <li>Four risk profiles available</li>
+        <li>Full construction and rebalancing</li>
+        <li>Industry average: 1–3% entry</li>
+      </ul>
+      <a href="#" class="fee-btn fee-btn-outline">View Portfolios</a>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="insights">
+  <div class="section-hd rv">
+    <div class="tag-pill">Insights</div>
+    <h2>Thinking on Shariah-Compliant Investing</h2>
+  </div>
+  <div class="insights-grid">
+    <div class="insight-card rv">
+      <div class="insight-img" style="background:linear-gradient(135deg,#055A57,#00917C);height:180px;"></div>
+      <div class="insight-body">
+        <div class="insight-cat">KAIF</div>
+        <div class="insight-title">Why Systematic Beats Discretionary for Shariah Investors</div>
+        <div class="insight-date">March 2025</div>
+      </div>
+    </div>
+    <div class="insight-card rv d1">
+      <div class="insight-img" style="background:linear-gradient(135deg,#1A1D1A,#055A57);height:180px;"></div>
+      <div class="insight-body">
+        <div class="insight-cat">Sukuk</div>
+        <div class="insight-title">The Case for Fixed Income in a Shariah-Compliant Portfolio</div>
+        <div class="insight-date">February 2025</div>
+      </div>
+    </div>
+    <div class="insight-card rv d2">
+      <div class="insight-img" style="background:linear-gradient(135deg,#00917C,#FFCE7B50);height:180px;"></div>
+      <div class="insight-body">
+        <div class="insight-cat">Index Portfolios</div>
+        <div class="insight-title">Global Benchmark Access Without Compliance Trade-offs</div>
+        <div class="insight-date">January 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner" id="contact">
+  <h2 class="rv">Ready to invest with discipline?</h2>
+  <p class="rv d1">Bring your portfolio objectives. We will show you exactly which strategy fits.</p>
+  <a href="mailto:invest@keheilan.com" class="rv d2">
+    Schedule a Call
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">Keheilan<sup>AM</sup></a>
+    <ul class="footer-links">
+      <li><a href="#">KAIF</a></li>
+      <li><a href="#">Sukuk</a></li>
+      <li><a href="#">Index Portfolios</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2025 Keheilan Asset Management</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('on'); io.unobserve(x.target);}}),{threshold:0.08});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.background = scrollY > 20 ? 'rgba(20,20,20,0.98)' : 'rgba(20,20,20,0.92)';
+}, {passive:true});
+</script>
+</body>
+</html>
